@@ -1,1 +1,1 @@
-# postgres-data-pipeline
+A hands-on SQL practice project building core Data Engineering skills through relational database design, joins, aggregations, CTEs, window functions, data-quality checks, and reproducible SQL workflows using PostgreSQL and Supabase. 
