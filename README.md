@@ -1,4 +1,4 @@
-# Project Overview
+## Project Overview
 This project began as hands-on SQL practice while preparing for the DataCamp's Associate Data Analyst Certification. It uses an AI generated synthetic retail dataset to practice querying relational data and solving common data problems.
 
 I am developing the project further to strengthen the SQL and database skills needed for a transition into Data Engineering.
