@@ -44,8 +44,7 @@ GROUP BY c.region;
 -- 7. Replace any NULL values in customers.age with the average age of all customers.
 SELECT customer_id, name, age,  
        COALESCE(age, (SELECT AVG(age) FROM customers)) AS filled_age
-FROM customers
-GROUP BY customer_id;
+FROM customers;
 
 -- 8. Count how many rows in customers have a NULL email.
 SELECT COUNT(*) AS blank_emails_rows
@@ -54,7 +53,7 @@ WHERE email IS NULL;
 
 -- 9. Write a query that standardizes orders.status so any NULL becomes 'unknown' (without changing the actual table).
 SELECT order_id, COALESCE(status, 'unknown')  AS order_status
-FROM orders
+FROM orders;
 
 -- Section D — Simple Window Functions
 -- 10. For each order, show its total_amount alongside the average order value for that customer's region (using a window function, not a subquery).
@@ -75,12 +74,18 @@ SELECT
        c.customer_id,
        c.name,
        COALESCE(SUM(o.total_amount), 0) AS total_spend,
-       RANK() OVER(ORDER BY COALESCE(SUM(o.total_amount), 0) DESC) AS spend_rank
+       RANK() OVER(
+              ORDER BY COALESCE(SUM(o.total_amount), 0) DESC
+       ) AS spend_rank
 FROM customers AS c
 LEFT JOIN orders AS o 
 ON c.customer_id = o.customer_id
-GROUP BY c.customer_id, c.name, o.total_amount
-ORDER BY spend_rank DESC;
+GROUP BY 
+       c.customer_id, 
+       c.name
+ORDER BY 
+       spend_rank DESC,
+       c.customer_id;
 
 -- Section E — Basic Stats Concepts
 -- 12. Calculate the mean and median of total_amount across all orders. Are they close together or far apart, and what would that suggest about the data's shape?
