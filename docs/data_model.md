@@ -56,6 +56,69 @@ erDiagram
 
 The `order_items` table acts as a junction table between orders and products.
 
+## Data Dictionary
+
+This section documents the columns, data types and nullability of the five database tables, based on the PostgreSQL schema.
+
+### 1. Customers
+
+| Column | Data Type | Nullable | Description |
+|---|---|---|---|
+| `customer_id` | INTEGER | No | Unique customer identifier (Primary Key) |
+| `name` | TEXT | Yes | Customer name |
+| `email` | TEXT | Yes | Customer email address |
+| `signup_date` | DATE | Yes | Customer registration date |
+| `region` | TEXT | Yes | Customer region |
+| `age` | INTEGER | Yes | Customer age |
+
+### 2. Products
+
+| Column | Data Type | Nullable | Description |
+|---|---|---|---|
+| `product_id` | INTEGER | No | Unique product identifier (Primary Key) |
+| `product_name` | TEXT | Yes | Product name |
+| `category` | TEXT | Yes | Product category |
+| `cost` | NUMERIC | Yes | Product cost |
+
+### 3. Orders
+
+| Column | Data Type | Nullable | Description |
+|---|---|---|---|
+| `order_id` | INTEGER | No | Unique order identifier (Primary Key) |
+| `customer_id` | INTEGER | Yes | Customer associated with the order |
+| `order_date` | DATE | Yes | Date the order was placed |
+| `status` | TEXT | Yes | Order status |
+| `total_amount` | NUMERIC | Yes | Total order amount |
+
+### 4. Order Items
+
+| Column | Data Type | Nullable | Description |
+|---|---|---|---|
+| `order_item_id` | INTEGER | No | Unique order item identifier (Primary Key) |
+| `order_id` | INTEGER | Yes | Associated order identifier |
+| `product_id` | INTEGER | Yes | Associated product identifier |
+| `quantity` | INTEGER | Yes | Quantity of the product ordered |
+| `unit_price` | NUMERIC | Yes | Price per product unit |
+
+### 5. Employees
+
+| Column | Data Type | Nullable | Description |
+|---|---|---|---|
+| `employee_id` | INTEGER | No | Unique employee identifier (Primary Key) |
+| `name` | TEXT | Yes | Employee name |
+| `manager_id` | INTEGER | Yes | Identifier of the employee's manager |
+| `department` | TEXT | Yes | Employee department |
+| `hire_date` | DATE | Yes | Employee hire date |
+| `salary` | NUMERIC | Yes | Employee salary |
+
+### Schema Observations
+
+- All five tables have an integer primary-key column.
+- All other columns currently allow NULL values.
+- No column defaults were returned by the schema inspection query.
+- Foreign-key constraints were not found in the `public` schema.
+- Columns such as `orders.customer_id`, `order_items.order_id`, `order_items.product_id` and `employees.manager_id` represent intended relationships in the logical data model. Their referential integrity is not currently enforced through foreign-key constraints.
+
 ## Data Integrity Considerations
 The current practice database uses primary keys but does not enforce foreign-key constraints.
 
