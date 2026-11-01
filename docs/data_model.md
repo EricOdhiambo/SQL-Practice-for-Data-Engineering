@@ -12,6 +12,7 @@ erDiagram
     CUSTOMERS ||--o{ ORDERS : places
     ORDERS ||--o{ ORDER_ITEMS : contains
     PRODUCTS ||--o{ ORDER_ITEMS : appears_in
+    EMPLOYEES o|--o{ EMPLOYEES : manages
 
     CUSTOMERS {
         int customer_id PK
@@ -36,7 +37,6 @@ erDiagram
         int employee_id PK
     }
 ```
-
 ## Relationship Descriptions
 1. Customers and Orders: One customer can place multiple orders. Each order is intended to belong to one customer.
 2. Orders and Order Items: One order can contain multiple order items.
